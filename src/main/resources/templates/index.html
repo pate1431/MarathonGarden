@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thyemleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+<title>Movies</title>
+</head>
+<body>
+	
+	<h1 style="text-align: center;"><kbd>MOVIES</kbd></h1>
+	
+	<nav class="navbar navbar-dark bg-dark">
+	<a class="navbar-brand" href="/">Home</a>
+		  <div class="container-fluid">
+		      <ul class="navbar-nav">
+		      	<li class="nav-item"><a class="nav-link" href="addMovie">Add Movie</a></li>
+		      	<li class="nav-item"><a href="addReview" class="nav-link">Add Review</a></li>
+		     </ul>
+		  </div>
+	</nav>
+	
+	
+	<hr>
+		<table class="table table-stripped" th:if="${movieList != null and !movieList.empty}">
+		<tr>
+			<th>Name</th>
+			<th>Author Name</th>
+			<th>Release
+				<div style="display:flex">
+				<form class="form-inline" method="post" th:action="findByOrderByReleaseDateAsc">
+					<input class="btn btn-outline-success btn-sm" type="submit" value="A" />
+				</form>
+				<form class="form-inline" method="post" th:action="findByOrderByReleaseDateDesc">
+					<input class="btn btn-outline-danger btn-sm" type="submit" value="D" />
+				</form>
+				</div>
+			</th>
+			<th>Streaming ON
+				<div style="display:flex">
+				<form class="form-inline" method="post" th:action="findByOrderByStreamingServiceAsc">
+						<input class="btn btn-outline-success btn-sm" type="submit" value="A" />
+				</form>
+				<form class="form-inline" method="post" th:action="findByOrderByStreamingServiceDesc">
+						<input class="btn btn-outline-danger btn-sm" type="submit" value="D" />
+				</form>
+				</div>
+			</th>
+			<th>Ratings</th>
+		</tr>
+		<tr  th:each="aMovie : ${movieList}">
+			<td th:text="${aMovie.name}">Frank</td>
+			<td th:text="${aMovie.authorName}">12</td>
+			<td th:text="${aMovie.releaseDate}">date</td>
+			<td th:text="${aMovie.streamingService}">net</td>
+
+			<td>
+				<table th:if="${!aMovie.reviewList.empty}">
+				 	<tr th:each="user : ${aMovie.reviewList}">
+				 		<td th:text="${user.ratings}">Purple Squeaker</td>
+				 	</tr>
+			 	</table>
+			</td>
+		</tr>
+		</table>
+	<hr>
+	<h1 style="text-align: center;"><kbd>Reviews</kbd></h1>
+		<table class="table table-stripped" th:if="${movieReviewList != null and !movieReviewList.empty}">
+		<tr>
+			<th>Name</th>
+			<th>
+				Ratings				
+				<div style="display:flex">
+				<form class="form-inline" method="post" th:action="findByOrderByRatingsAsc">
+					<input class="btn btn-outline-success btn-sm" type="submit" value="A" />
+				</form>
+				<form class="form-inline" method="post" th:action="findByOrderByRatingsDesc">
+					<input class="btn btn-outline-danger btn-sm" type="submit" value="D" />
+				</form>
+				</div>
+			</th>
+			<th>Review Movie</th>
+			<th>Review Author</th>
+			<th>
+				Review Date
+				<div style="display:flex">
+				<form class="form-inline" method="post" th:action="findByOrderByReviewDateAsc">
+					<input class="btn btn-outline-success btn-sm" type="submit" value="A" />
+				</form>
+				
+				<form class="form-inline" method="post" th:action="findByOrderByReviewDateDesc">
+					<input class="btn btn-outline-danger btn-sm" type="submit" value="D" />
+				</form>
+				</div>
+			</th>
+			
+			<th >
+				Review Time
+				<div style="display:flex" >
+				<form class="form-inline" method="post" th:action="findByOrderByReviewTimeAsc">
+					<input class="btn btn-outline-success btn-sm" type="submit" value="A" />
+				</form>
+				
+				<form class="form-inline" method="post" th:action="findByOrderByReviewTimeDesc">
+					<input class="btn btn-outline-danger btn-sm" type="submit" value="D" />
+				</form>
+				</div>
+			</th>
+		</tr>
+		<tr  th:each="aReview : ${movieReviewList}">
+			<td th:text="${aReview.name}">Frank</td>
+			<td th:text="${aReview.ratings}">Frank</td>
+			<td th:text="${aReview.reviewMovie}">bad</td>
+			<td th:text="${aReview.reviewAuthor}">bad</td>
+			<td th:text="${aReview.reviewDate}">date</td>
+			<td th:text="${aReview.reviewTime}">time</td>
+		</tr>
+		</table>
+
+</body>
+</html>

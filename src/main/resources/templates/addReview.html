@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thyemleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Review Window</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</head>
+<body>
+	<h2 style="text-align: center;"><kbd>Add Review Form</kbd></h2>
+		<nav class="navbar navbar-dark bg-dark">
+	<a class="navbar-brand" href="/">Home</a>
+		  <div class="container-fluid">
+		      <ul class="navbar-nav">
+		      	<li class="nav-item"><a class="nav-link" href="addMovie">Add Movie</a></li>
+		      	<li class="nav-item"><a href="addReview" class="nav-link">Add Review</a></li>
+		     </ul>
+		  </div>
+	</nav>
+	<form class="form-inline" method="post" th:action="addReview" th:object="${movieReview}"> 	
+	 	<input type="hidden" th:field="*{id}"/>
+	 	
+
+	 	Name:<input type="text" th:field="*{name}"/>
+	 	Movie Name:<select name="pid">
+	 					<option th:each="p : ${movieData}" th:value="${p.id}" th:text="${p.name}">
+	 				</select>	
+	 	<br>
+	 	Review Movie:<input type="number" min="0" max="10" step="0.1" th:field="*{ratings}"/>
+	 	Review Movie:<input type="text" th:field="*{reviewMovie}"/>
+	 	Review Author:<input type="text" th:field="*{reviewAuthor}"/>	
+	 	Review Date: <input type="date" th:field="*{reviewDate}"/>
+	 	Review Time: <input type="time" th:field="*{reviewTime}"/>	 	
+	 	
+	 	
+	 	
+	 	
+	 	<input type="submit"value="Add Review!"/>
+ 	</form>
+</body>
+</html>
